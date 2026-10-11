@@ -358,9 +358,17 @@ function initTimelineImages() {
 
         if (!titleElement || !imageContainer) return;
 
+        // Sonderfall: Der letzte Timeline-Eintrag heißt "Dieses Jahr",
+        // seine Bilddatei ist aber nach dem Jahr benannt: 2026.jpeg.
+        const yearElement = event.querySelector(".year");
+        const year = yearElement ? yearElement.textContent.trim() : "";
+        const imageName = year === "2026"
+            ? "2026"
+            : titleElement.textContent.trim();
+
         loadTimelineImage(
             imageContainer,
-            titleElement.textContent
+            imageName
         );
     });
 }
